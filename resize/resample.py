@@ -24,6 +24,11 @@ class resample:
         """
 
         #Write your code for nearest neighbor interpolation here
+        w, h = fx*len(image), fy*len(image)
+
+
+
+
 
         return image
 
