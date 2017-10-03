@@ -62,6 +62,15 @@ class resample:
         """
 
         # Write your code for bilinear interpolation here
+        newW = int(image.shape[1]*float(fx))
+        newH = int(image.shape[0]*float(fy))
+
+        import numpy as np
+        newImg = np.zeros((newH, newW), np.unit8)
+        #for i in range(newImg.shape[0]):
+        #    for j in range(newImg.shape[1]):
+
+
 
         return image
 
