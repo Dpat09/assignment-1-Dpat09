@@ -6,17 +6,15 @@ class interpolation:
         pt1: known point pt1 and f(pt1) or intensity value
         pt2: known point pt2 and f(pt2) or intensity value
         unknown: take and unknown location
-        return the f(unknown) or intentity at unknown"""
+        return the f(unknown) or intensity at unknown"""
 
         #Write your code for linear interpolation here
-        ex1 = [2,255]
-        ex2 = [4,150]
-        unk = [3,155]
-        temp = (ex1[1]*(ex2[0]-unk[0]))/(ex2[0]-ex1[0])
-        temp2 = (ex2[1]*(unk[0]-ex1[0]))/(ex2[0]-ex1[0])
-        unknown = temp+temp2
+        temp1 = (pt1[1]*(pt2[0]-unknown[0]))/(pt2[0]-pt1[0])
+        temp2 = (pt2[1]*(unknown[0]-pt1[0]))/(pt2[0]-pt1[0])
 
-        return temp
+        unknown = temp1+temp2
+
+        return unknown
 
     def bilinear_interpolation(self, pt1, pt2, pt3, pt4, unknown):
         """Computes the linear interpolation for the unknown values using pt1 and pt2
@@ -31,4 +29,8 @@ class interpolation:
         # Write your code for bilinear interpolation here
         # May be you can reuse or call linear interpolatio method to compute this task
 
-        return 0
+        R1 = self.linear_interpolation((pt1[0],pt1[2]), (pt3[0],pt3[2]), (unknown[0],unknown[2]))
+        R2 = self.linear_interpolation((pt2[0],pt2[2]), (pt4[0],pt4[2]), (unknown[0],unknown[2]))
+        unknown = self.linear_interpolation((pt1[1],R1), (pt2[1],R2), (unknown[1],unknown[2]))
+
+        return unknown

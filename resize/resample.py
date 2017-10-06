@@ -65,10 +65,34 @@ class resample:
         newW = int(image.shape[1]*float(fx))
         newH = int(image.shape[0]*float(fy))
 
+        ratioW = float(fx) / newW
+        ratioH = float(fy) / newH
+
         import numpy as np
-        newImg = np.zeros((newH, newW), np.unit8)
-        #for i in range(newImg.shape[0]):
-        #    for j in range(newImg.shape[1]):
+        import math as ma
+        from . import interpolation as bilinear
+        bi = bilinear.interpolation()
+        newImg = np.zeros((newH, newW), np.uint8)
+        for i in range(newImg.shape[0]):
+            for j in range(newImg.shape[1]):
+
+                x = ratioH * i
+                y = ratioW * j
+                x1 = ma.floor(x)
+                x2 = ma.ceil(x)
+                y1 = ma.floor(y)
+                y2 = ma.ceil(y)
+
+                pt1 = (x1, y1, image[x1, y1])
+                pt2 = (x1, y2, image[x1, y2])
+                pt3 = (x2, y1, image[x2, y1])
+                pt4 = (x2, y2, image[x2, y2])
+                unknown = (x, y, 0)
+
+                newImg[i, j] = bi.bilinear_interpolation(pt1, pt2, pt3, pt4, unknown)
+
+
+                #pt1, pt2, pt3, pt4, unknown
 
 
 
