@@ -65,8 +65,8 @@ class resample:
         w = image.shape[1]
         h = image.shape[0]
 
-        newW = int(image.shape[1]*float(fx))
-        newH = int(image.shape[0]*float(fy))
+        newW = int(w*float(fx))
+        newH = int(h*float(fy))
 
         ratioW = w / newW
         ratioH = h / newH

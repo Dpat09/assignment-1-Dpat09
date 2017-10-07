@@ -36,7 +36,7 @@ class interpolation:
             return self.linear_interpolation((pt1[0], pt1[2]), (pt3[0], pt3[2]), (unknown[0], unknown[2]))
 
         R1 = self.linear_interpolation((pt1[0], pt1[2]), (pt3[0], pt3[2]), (unknown[0], unknown[2]))
-        R2 = self.linear_interpolation((pt2[0],pt2[2]), (pt4[0],pt4[2]), (unknown[0],unknown[2]))
-        R3 = self.linear_interpolation((pt1[1],R1), (pt2[1],R2), (unknown[1],unknown[2]))
+        R2 = self.linear_interpolation((pt2[0], pt2[2]), (pt4[0], pt4[2]), (unknown[0], unknown[2]))
+        R3 = self.linear_interpolation((pt1[1], R1), (pt2[1], R2), (unknown[1], unknown[2]))
 
         return R3
