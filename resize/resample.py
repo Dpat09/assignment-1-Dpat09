@@ -62,11 +62,14 @@ class resample:
         """
 
         # Write your code for bilinear interpolation here
+        w = image.shape[1]
+        h = image.shape[0]
+
         newW = int(image.shape[1]*float(fx))
         newH = int(image.shape[0]*float(fy))
 
-        ratioW = float(fx) / newW
-        ratioH = float(fy) / newH
+        ratioW = w / newW
+        ratioH = h / newH
 
         import numpy as np
         import math as ma
@@ -78,10 +81,20 @@ class resample:
 
                 x = ratioH * i
                 y = ratioW * j
+
                 x1 = ma.floor(x)
                 x2 = ma.ceil(x)
                 y1 = ma.floor(y)
                 y2 = ma.ceil(y)
+
+                if x1 == h:
+                    x1 -= 1
+                if x2 == h:
+                    x2 -= 1
+                if y1 == w:
+                    y1 -= 1
+                if y2 == w:
+                    y2 -= 1
 
                 pt1 = (x1, y1, image[x1, y1])
                 pt2 = (x1, y2, image[x1, y2])
@@ -89,12 +102,11 @@ class resample:
                 pt4 = (x2, y2, image[x2, y2])
                 unknown = (x, y, 0)
 
-                newImg[i, j] = bi.bilinear_interpolation(pt1, pt2, pt3, pt4, unknown)
+                if pt1[0] == pt3[0] and pt1[2] == pt2[2]:
+                    newImg[i, j] = image[int(x), int(y)]
+                else:
+                    newImg[i, j] = bi.bilinear_interpolation(pt1, pt2, pt3, pt4, unknown)
 
-
-                #pt1, pt2, pt3, pt4, unknown
-
-
-
+        image = newImg
         return image
 

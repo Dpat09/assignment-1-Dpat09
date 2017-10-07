@@ -8,13 +8,13 @@ class interpolation:
         unknown: take and unknown location
         return the f(unknown) or intensity at unknown"""
 
-        #Write your code for linear interpolation here
-        temp1 = (pt1[1]*(pt2[0]-unknown[0]))/(pt2[0]-pt1[0])
-        temp2 = (pt2[1]*(unknown[0]-pt1[0]))/(pt2[0]-pt1[0])
+        # Write your code for linear interpolation here
+        temp1 = pt1[1]*((pt2[0]-unknown[0])/(pt2[0]-pt1[0]))
+        temp2 = pt2[1]*((unknown[0]-pt1[0])/(pt2[0]-pt1[0]))
 
-        unknown = temp1+temp2
+        # unknown = temp1+temp2
 
-        return unknown
+        return temp1+temp2
 
     def bilinear_interpolation(self, pt1, pt2, pt3, pt4, unknown):
         """Computes the linear interpolation for the unknown values using pt1 and pt2
@@ -27,10 +27,16 @@ class interpolation:
         return the f(unknown) or intentity at unknown"""
 
         # Write your code for bilinear interpolation here
-        # May be you can reuse or call linear interpolatio method to compute this task
+        # May be you can reuse or call linear interpolation method to compute this task
 
-        R1 = self.linear_interpolation((pt1[0],pt1[2]), (pt3[0],pt3[2]), (unknown[0],unknown[2]))
+        if pt1[0] == pt3[0]:
+            return self.linear_interpolation((pt1[1], pt1[2]), (pt2[1], pt2[2]), (unknown[1], unknown[2]))
+
+        if pt1[1] == pt2[1]:
+            return self.linear_interpolation((pt1[0], pt1[2]), (pt3[0], pt3[2]), (unknown[0], unknown[2]))
+
+        R1 = self.linear_interpolation((pt1[0], pt1[2]), (pt3[0], pt3[2]), (unknown[0], unknown[2]))
         R2 = self.linear_interpolation((pt2[0],pt2[2]), (pt4[0],pt4[2]), (unknown[0],unknown[2]))
-        unknown = self.linear_interpolation((pt1[1],R1), (pt2[1],R2), (unknown[1],unknown[2]))
+        R3 = self.linear_interpolation((pt1[1],R1), (pt2[1],R2), (unknown[1],unknown[2]))
 
-        return unknown
+        return R3

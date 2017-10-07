@@ -7,9 +7,11 @@ class binary_image:
         takes as input:
         image: a grey scale image
         returns a histogram"""
-
+        import numpy as np
         hist = [0]*256
 
+        for intensity in np.nditer(image):
+            hist[intensity] += 1
 
         return hist
 
