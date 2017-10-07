@@ -12,8 +12,6 @@ class interpolation:
         temp1 = pt1[1]*((pt2[0]-unknown[0])/(pt2[0]-pt1[0]))
         temp2 = pt2[1]*((unknown[0]-pt1[0])/(pt2[0]-pt1[0]))
 
-        # unknown = temp1+temp2
-
         return temp1+temp2
 
     def bilinear_interpolation(self, pt1, pt2, pt3, pt4, unknown):
