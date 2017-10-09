@@ -5,8 +5,27 @@ class cell_counting:
         takes a input:
         image: binary image
         return: a list of regions"""
-
+        import numpy as np
         regions = dict()
+        R = np.zeros((image.shape[0], image.shape[1]), np.uint32)
+        k = 1
+
+        for i in range(image.shape[0]):
+            for j in range(image.shape[1]):
+                if (image[i,j] == 1 and image[i,j-1] == 0 and image[i-1,j] == 0):
+                    R[(i, j)] = k
+                    regions[k] = {(i, j)}
+                    k += 1
+
+                elif (image[i,j] == 1 and image[i,j-1] == 0 and image[i-1,j] == 1):
+                    R[(i, j)] = R[(i-1, j)]
+                    regions[R[i, j]].add((i, j))
+
+                elif (image[i,j] == 1 and image[i,j-1] == 1 and image[i-1,j] == 0):
+                    R[(i, j)] = R[(i, j-1)]
+                    regions[R[i, j]].add((i, j))
+                elif (image[i,j] == 1 and image[i,j-1] == 1 and image[i-1,j] == 1):
+                    R[(i, j)] = R[(i-1,j)]
 
         return regions
 
@@ -15,7 +34,7 @@ class cell_counting:
         takes as input
         region: a list of pixels in a region
         returns: area"""
-
+        
 
 
         # Please print your region statistics to stdout
@@ -30,6 +49,8 @@ class cell_counting:
         image: a list of pixels in a region
         stats: stats regarding location and area
         returns: image marked with center and area"""
+
+
 
         return image
 
