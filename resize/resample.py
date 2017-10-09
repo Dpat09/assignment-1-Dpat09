@@ -41,10 +41,8 @@ class resample:
                 x = round(ratioH*i)
                 y = round(ratioW*j)
 
-                if x == h:
-                    x-=1
-                if y == w:
-                    y-=1
+                x = x-1 if x == h else x
+                y = y-1 if y == w else y
 
                 temp = image[x, y]
                 newImg[i,j] = temp
