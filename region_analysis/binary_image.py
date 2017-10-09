@@ -22,39 +22,39 @@ class binary_image:
         returns: an optimal threshold value"""
 
         threshold = int(len(hist)/2)
-        delta1prev, delta2prev = 0, 0
+        exp1prev, exp2prev = 0, 0
         totalNumberOfPixels = sum(hist)
 
         # first iteration to start
         temp = 0
         for intensity, value in enumerate(hist[:threshold]):
             temp += (intensity * (value / totalNumberOfPixels))
-        delta1 = temp
+        exp1 = temp
 
         temp = 0
         for intensity, value in enumerate(hist[threshold:]):
             temp += ((intensity + threshold) * (value / totalNumberOfPixels))
-        delta2 = temp
+        exp2 = temp
 
-        threshold = int((delta1 + delta2) / 2)
+        threshold = int((exp1 + exp2) / 2)
 
         while True:
-            if (delta1 - delta1prev) == 0 and (delta2 - delta2prev) == 0:
+            if (exp1 - exp1prev) == 0 and (exp2 - exp2prev) == 0:
                 break
-            delta1prev = delta1
-            delta2prev = delta2
+            exp1prev = exp1
+            exp2prev = exp2
 
             temp = 0
             for intensity, value in enumerate(hist[:threshold]):
                 temp += (intensity * (value / totalNumberOfPixels))
-            delta1 = temp
+            exp1 = temp
 
             temp = 0
             for intensity, value in enumerate(hist[threshold:]):
                 temp += ((intensity + threshold) * (value / totalNumberOfPixels))
-            delta2 = temp
+            exp2 = temp
 
-            threshold = int((delta1 + delta2)/2)
+            threshold = int((exp1 + exp2)/2)
 
         return threshold
 
@@ -69,10 +69,7 @@ class binary_image:
         threshold = self.find_optimal_threshold(histogram)
         for i in range(bin_img.shape[0]):
             for j in range(bin_img.shape[1]):
-                if image[i, j] >= threshold:
-                    bin_img[i, j] = 255
-                else:
-                    bin_img[i, j] = 0
+                bin_img[i, j] = 255 if image[i, j] >= threshold else 0
 
         return bin_img
 
