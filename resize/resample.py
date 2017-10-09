@@ -87,14 +87,10 @@ class resample:
                 y1 = ma.floor(y)
                 y2 = ma.ceil(y)
 
-                if x1 == h:
-                    x1 -= 1
-                if x2 == h:
-                    x2 -= 1
-                if y1 == w:
-                    y1 -= 1
-                if y2 == w:
-                    y2 -= 1
+                x1 = x1-1 if x1 == h else x1
+                x2 = x2-1 if x2 == h else x2
+                y1 = y1-1 if y1 == w else y1
+                y2 = y2-1 if y2 == w else y2
 
                 pt1 = (x1, y1, image[x1, y1])
                 pt2 = (x1, y2, image[x1, y2])
