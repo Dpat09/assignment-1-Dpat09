@@ -29,7 +29,8 @@ Assignment #1
     
 2. Region Counting:
 
-    - a.) Binary image
+    - a.) Binary image:
+    
         - compute_histogram:
             - Used numpy nditer that I found searching how to iterate through a numpy array. Found some help in scipy documents online. 
               Not having experience in numpy and python really hindered my performance on this homework.
@@ -58,4 +59,12 @@ Assignment #1
         -   Overall threshold was the toughest part.
         
 
-            
+    - b.) Blob coloring:
+        
+        -   blob_coloring:
+            - This function was pretty hard to understand from the slides.
+            - This function was heavily modeled after the lecture slides.
+            - So we create a numpy array of zeros to which we would map the regions.
+            - As we iterate through the images, we use many if statements to check if there are any black pixels above, and the the left of the current pixels
+            - As we do the above, we set k (blob numbers) at each respective position (i,j) in R.
+            - Then we would add the set to regions to keep track of all pairs under each dictionary positions         
